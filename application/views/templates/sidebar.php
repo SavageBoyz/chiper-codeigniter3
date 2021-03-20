@@ -6,8 +6,8 @@
   <i class="bi bi-chevron-compact-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="/chiper/double_switch">Зашифровать</a>
-    <a href="#">Дешифровать</a>
+    <a href="/chiper/double_switch_e">Зашифровать</a>
+    <a href="/chiper/double_switch_d">Дешифровать</a>
   </div>
 </div>
 

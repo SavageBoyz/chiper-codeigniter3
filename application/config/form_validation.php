@@ -10,11 +10,12 @@ $config = array(
         array(
             'field' => 'msg',
             'label' => 'Message',
-            'rules' => 'required|trim|min_length[2]|max_length[50]',
+            'rules' => 'required|trim|min_length[2]|max_length[50]|msg_check',
             'errors' => array(
                 'required' => 'Введите сообщение',
                 'min_length' => 'Сообщение слишком короткое',
                 'max_length' => 'Сообщение слишком длинное',
+                'msg_check' => 'Длина сообщения не может быть меньше длины произведения ключей'
             ),
         ),
         array(

@@ -53,4 +53,5 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['chiper/double_switch'] = 'Double_switch/index';
+$route['chiper/double_switch_e'] = 'Double_switch/viewEncrypt';
+$route['chiper/double_switch_d'] = 'Double_switch/viewDecode';
