@@ -7,9 +7,8 @@ class Double_switch extends CI_Controller
     {
         parent::__construct();
         $this->load->library('session');
-        $this->load->helper(array('form', 'url'));
-
         $this->load->library('form_validation');
+        $this->load->helper(array('form', 'url'));
     }
 
     public function viewEncrypt($request = "")
@@ -63,9 +62,9 @@ class Double_switch extends CI_Controller
 
             /*Замена букв на цифры ключ 1*/
             for ($i = 0; $i < count($keyFirst); $i++)
-                if (!is_numeric($keyFirst[$i])) {
-                    $keyFirst[$i] = array_search($keyFirst[$i], ALPHABET);
-                }
+            {
+                $keyFirst[$i] = array_search($keyFirst[$i], ALPHABET);
+            }
 
             $temp = array_fill(1, count($keyFirst), '*');
 
@@ -79,13 +78,29 @@ class Double_switch extends CI_Controller
             for ($i = 0; $i < count($keyFirst); $i++) {
                 $keyFirst[$i] = array_search($keyFirst[$i], $temp);
             }
+
+            for($i = 1; $i < count($keyFirst); $i++)
+            {
+                for($j = 0; $j < count($keyFirst); $j++){
+                    
+                    if($i == $j)
+                    {
+                        continue;
+                    }
+                    
+                    if($keyFirst[$i] == $keyFirst[$j]){
+                        $keyFirst[$j]++;
+                    }
+                    
+                }
+            }
             /***********************/
 
             /*Замена букв на цифры ключ 2*/
             for ($i = 0; $i < count($keySecond); $i++)
-                if (!is_numeric($keySecond[$i])) {
-                    $keySecond[$i] = array_search($keySecond[$i], ALPHABET);
-                }
+            {
+                $keySecond[$i] = array_search($keySecond[$i], ALPHABET);
+            }
 
             $temp = array_fill(1, count($keySecond), '*');
 
@@ -98,6 +113,22 @@ class Double_switch extends CI_Controller
 
             for ($i = 0; $i < count($keySecond); $i++) {
                 $keySecond[$i] = array_search($keySecond[$i], $temp);
+            }
+
+            for($i = 1; $i < count($keySecond); $i++)
+            {
+                for($j = 0; $j < count($keySecond); $j++){
+                    
+                    if($i == $j)
+                    {
+                        continue;
+                    }
+                    
+                    if($keySecond[$i] == $keySecond[$j]){
+                        $keySecond[$j]++;
+                    }
+                    
+                }
             }
             /***********************/
 
@@ -167,7 +198,7 @@ class Double_switch extends CI_Controller
             $keySecond = mb_str_split($keySecond);
             $msg = mb_str_split($msg);
     
-                /*Замена букв на цифры ключ 1*/
+            /*Замена букв на цифры ключ 1*/
             for ($i = 0; $i < count($keyFirst); $i++)
             {
                 $keyFirst[$i] = array_search($keyFirst[$i], ALPHABET);
@@ -184,6 +215,22 @@ class Double_switch extends CI_Controller
     
             for ($i = 0; $i < count($keyFirst); $i++) {
                 $keyFirst[$i] = array_search($keyFirst[$i], $temp);
+            }
+
+            for($i = 1; $i < count($keyFirst); $i++)
+            {
+                for($j = 0; $j < count($keyFirst); $j++){
+                    
+                    if($i == $j)
+                    {
+                        continue;
+                    }
+                    
+                    if($keyFirst[$i] == $keyFirst[$j]){
+                        $keyFirst[$j]++;
+                    }
+                    
+                }
             }
             /***********************/
                 
@@ -204,6 +251,22 @@ class Double_switch extends CI_Controller
     
             for ($i = 0; $i < count($keySecond); $i++) {
                 $keySecond[$i] = array_search($keySecond[$i], $temp);
+            }
+
+            for($i = 1; $i < count($keySecond); $i++)
+            {
+                for($j = 0; $j < count($keySecond); $j++){
+                    
+                    if($i == $j)
+                    {
+                        continue;
+                    }
+                    
+                    if($keySecond[$i] == $keySecond[$j]){
+                        $keySecond[$j]++;
+                    }
+                    
+                }
             }
             /***********************/
 
@@ -231,7 +294,7 @@ class Double_switch extends CI_Controller
             }
             /*******************************************/
 
-            /*Привязка значений ко 2 ключу и сортировка*/
+            /*Привязка значений к 1 ключу и сортировка*/
             $decodeMsgByFK = array_fill_keys($keyFK,array_fill(0, count($keySecond), '*'));
 
             for($i = 0; $i < count($keyFirst); $i++){
@@ -254,6 +317,7 @@ class Double_switch extends CI_Controller
                     $data .= $decodeMsgByFK[$j][$i];
                 }
             }
+            $data = rtrim($data, "*");
             $this->viewDecode($data);
         }
     }

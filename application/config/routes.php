@@ -52,6 +52,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
+/* Рут для шифра двойной перестановки */
 $route['chiper/double_switch_e'] = 'Double_switch/viewEncrypt';
 $route['chiper/double_switch_d'] = 'Double_switch/viewDecode';
+/* Рут для шифра Цезаря с ключевым словом */
+$route['chiper/caesar_with_keyword_e'] = 'Caesar_with_keyword/viewEncrypt';
+$route['chiper/caesar_with_keyword_d'] = 'Caesar_with_keyword/viewDecode';
