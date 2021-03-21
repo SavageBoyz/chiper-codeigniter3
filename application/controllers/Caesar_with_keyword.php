@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
@@ -44,67 +44,141 @@ class Caesar_with_keyword extends CI_Controller
      */
     public function encrypt()
     {
-        /* Работа с введенными в форму данными */
-        $keyFirst = $this->input->post('keyFirst');
-        $num = $this->input->post('num');
-        $msg = $this->input->post('msg');
+        /* Валидация */
+        $this->form_validation->set_error_delimiters('> ', '');
 
-        $msg = str_replace(" ", "_", $msg);
-        $keyFirst = str_replace(" ", "", $keyFirst);
-        
-        $keyFirst = mb_strtoupper($keyFirst);
-        $msg = mb_strtoupper($msg);
+        if ($this->form_validation->run('caesar_with_keyword') == FALSE) {
+            $this->viewEncrypt();
+        } else {
 
-        $keyFirst = mb_str_split($keyFirst);
-        $msg = mb_str_split($msg);
-        
-        $keyFirst = array_unique($keyFirst);
+            /* Работа с введенными в форму данными */
+            $keyFirst = $this->input->post('keyFirst');
+            $num = $this->input->post('num');
+            $msg = $this->input->post('msg');
 
-        $temp = array_diff(ALPHABET,$keyFirst);
-        $temp = array_values($temp);
+            $msg = str_replace(" ", "_", $msg);
+            $keyFirst = str_replace(" ", "", $keyFirst);
 
-        $keyFirst = array_values($keyFirst);
-        /***************************************/
+            $keyFirst = mb_strtoupper($keyFirst);
+            $msg = mb_strtoupper($msg);
 
-        /* Формирование побочного алфавита */
-        for($i = (count($temp) - $num); $i < count($temp); $i++){
-            $sideCodingA[] = $temp[$i];
-        } 
-        
-        for($i = 0; $i < count($keyFirst); $i++){
-            $sideCodingA[] = $keyFirst[$i];
-        } 
-        
-        for($i = 0; $i < count($temp) - $num; $i++){
-            $sideCodingA[] = $temp[$i];
-        }
-        /********************************/
+            $keyFirst = mb_str_split($keyFirst);
+            $msg = mb_str_split($msg);
 
-        /* Создание таблицы для работы */
-        for($i = 0;$i < count(ALPHABET);$i++){
-            $mainCodingA[] = array(ALPHABET[$i] => $sideCodingA[$i]);
-        }
-        /****************************/
+            $keyFirst = array_unique($keyFirst);
 
-        /* Вывод сообщения */
-        $str = "";
-        foreach($msg as $value){
-            for($i = 0; $i < count($mainCodingA);$i++){
-                if($value == ALPHABET[$i]){
-                    $str .= $mainCodingA[$i][ALPHABET[$i]];
-                    break;
-                }else if($value == "_"){
-                    $str .= "_";
-                    break;
+            $temp = array_diff(ALPHABET, $keyFirst);
+            $temp = array_values($temp);
+
+            $keyFirst = array_values($keyFirst);
+            /***************************************/
+
+            /* Формирование побочного алфавита */
+            for ($i = (count($temp) - $num); $i < count($temp); $i++) {
+                $sideCodingA[] = $temp[$i];
+            }
+
+            for ($i = 0; $i < count($keyFirst); $i++) {
+                $sideCodingA[] = $keyFirst[$i];
+            }
+
+            for ($i = 0; $i < count($temp) - $num; $i++) {
+                $sideCodingA[] = $temp[$i];
+            }
+            /********************************/
+
+            /* Создание таблицы для работы */
+            for ($i = 0; $i < count(ALPHABET); $i++) {
+                $mainCodingA[] = array(ALPHABET[$i] => $sideCodingA[$i]);
+            }
+            /****************************/
+
+            /* Вывод сообщения */
+            $str = "";
+            foreach ($msg as $value) {
+                for ($i = 0; $i < count($mainCodingA); $i++) {
+                    if ($value == ALPHABET[$i]) {
+                        $str .= $mainCodingA[$i][ALPHABET[$i]];
+                        break;
+                    } else if ($value == "_") {
+                        $str .= "_";
+                        break;
+                    }
                 }
             }
+            $this->viewEncrypt($str);
+            /*******************/
         }
-        $this->viewEncrypt($str);
-        /*******************/
     }
 
+    /**
+     * Фукция для дешифровки. Шифр Цезаря с ключевым словом
+     * 
+     */
     public function decode()
     {
-        
+        $this->form_validation->set_error_delimiters('> ', '');
+
+        if ($this->form_validation->run('caesar_with_keyword') == FALSE) {
+            $this->viewDecode();
+        } else {
+            /* Работа с введенными в форму данными */
+            $keyFirst = $this->input->post('keyFirst');
+            $num = $this->input->post('num');
+            $msg = $this->input->post('msg');
+
+            $msg = str_replace(" ", "_", $msg);
+            $keyFirst = str_replace(" ", "", $keyFirst);
+
+            $keyFirst = mb_strtoupper($keyFirst);
+            $msg = mb_strtoupper($msg);
+
+            $keyFirst = mb_str_split($keyFirst);
+            $msg = mb_str_split($msg);
+
+            $keyFirst = array_unique($keyFirst);
+
+            $temp = array_diff(ALPHABET, $keyFirst);
+            $temp = array_values($temp);
+
+            $keyFirst = array_values($keyFirst);
+            /***************************************/
+
+            /* Формирование побочного алфавита */
+            for ($i = (count($temp) - $num); $i < count($temp); $i++) {
+                $sideCodingA[] = $temp[$i];
+            }
+
+            for ($i = 0; $i < count($keyFirst); $i++) {
+                $sideCodingA[] = $keyFirst[$i];
+            }
+
+            for ($i = 0; $i < count($temp) - $num; $i++) {
+                $sideCodingA[] = $temp[$i];
+            }
+            /********************************/
+
+            /* Создание таблицы для работы */
+            for ($i = 0; $i < count(ALPHABET); $i++) {
+                $mainCodingA[] = array(ALPHABET[$i] => $sideCodingA[$i]);
+            }
+            /****************************/
+
+            /* Вывод сообщения */
+            $str = "";
+            foreach ($msg as $value) {
+                for ($i = 0; $i < count($mainCodingA); $i++) {
+                    if ($value == $mainCodingA[$i][ALPHABET[$i]]) {
+                        $str .= ALPHABET[$i];
+                        break;
+                    } else if ($value == "_") {
+                        $str .= "_";
+                        break;
+                    }
+                }
+            }
+            $this->viewDecode($str);
+            /*******************/
+        }
     }
 }
