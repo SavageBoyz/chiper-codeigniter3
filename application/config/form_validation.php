@@ -113,4 +113,18 @@ $config = array(
 			),
 		),
 	),
+	'double_switch_winston' => array(
+		array(
+			'field' => 'msg',
+			'label' => 'Message',
+			'rules' => 'required|trim|min_length[2]|max_length[50]|regex_match[/[А-Яа-яЁё]/u]',
+			'errors' => array(
+				'required' => 'Введите сообщение',
+				'min_length' => 'Сообщение слишком короткое',
+				'max_length' => 'Сообщение слишком длинное',
+				'msg_check' => 'Длина сообщения не может быть меньше длины произведения ключей',
+				'regex_match' => 'Сообщение может состоять только из букв'
+			),
+		),
+	),
 );

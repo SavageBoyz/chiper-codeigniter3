@@ -61,3 +61,6 @@ $route['chiper/caesar_with_keyword_d'] = 'Caesar_with_keyword/viewDecode';
 /* Рут для шифра Цезаря с Афинной перестановкой */
 $route['chiper/caesar_affine_e'] = 'Caesar_affine/viewEncrypt';
 $route['chiper/caesar_affine_d'] = 'Caesar_affine/viewDecode';
+/* Рут для шифра двойной перестановки Уинстона*/
+$route['chiper/double_switch_winston_e'] = 'Double_switch_winston/viewEncrypt';
+$route['chiper/double_switch_winston_d'] = 'Double_switch_winston/viewDecode';

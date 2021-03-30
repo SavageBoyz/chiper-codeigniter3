@@ -73,7 +73,7 @@ class Caesar_affine extends CI_Controller
 	}
 
 	/**
-	 * Фукция для дешифровки. Шифр Цезаря с ключевым словом
+	 * Фукция для дешифровки. Шифр Цезаря с Афинной перестановкой
 	 *
 	 */
 	public function decode()
