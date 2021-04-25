@@ -46,7 +46,7 @@ $config = array(
 		array(
 			'field' => 'msg',
 			'label' => 'Message',
-			'rules' => 'required|trim|min_length[2]|max_length[50]|msg_check|regex_match[/[А-Яа-яЁё]/u]',
+			'rules' => 'required|trim|min_length[2]|max_length[50]|regex_match[/[А-Яа-яЁё]/u]',
 			'errors' => array(
 				'required' => 'Введите сообщение',
 				'min_length' => 'Сообщение слишком короткое',
@@ -81,7 +81,7 @@ $config = array(
 		array(
 			'field' => 'msg',
 			'label' => 'Message',
-			'rules' => 'required|trim|min_length[2]|max_length[50]|msg_check|regex_match[/[А-Яа-яЁё]/u]',
+			'rules' => 'required|trim|min_length[2]|max_length[50]|regex_match[/[А-Яа-яЁё]/u]',
 			'errors' => array(
 				'required' => 'Введите сообщение',
 				'min_length' => 'Сообщение слишком короткое',

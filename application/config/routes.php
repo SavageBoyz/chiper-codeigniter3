@@ -64,3 +64,5 @@ $route['chiper/caesar_affine_d'] = 'Caesar_affine/viewDecode';
 /* Рут для шифра двойной перестановки Уинстона*/
 $route['chiper/double_switch_winston_e'] = 'Double_switch_winston/viewEncrypt';
 $route['chiper/double_switch_winston_d'] = 'Double_switch_winston/viewDecode';
+/* Рут для протокола Шамира*/
+$route['chiper/shamir_protocol'] = 'shamir_protocol/viewEncrypt';
